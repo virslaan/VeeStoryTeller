@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speak & Play Music</title>
+<style>
+  /* Inline CSS for simplicity */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+  }
+  #text-to-speak {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+  }
+  #speak-btn {
+    padding: 10px 20px;
+    margin: 10px;
+  }
+</style>
+</head>
+<body>
+  <h1>Speak & Play Music</h1>
+  <input type="text" id="text-to-speak" placeholder="Type something..." />
+  <button id="speak-btn">Speak</button>
+  <br>
+  <audio id="background-music" loop>
+    <source src="your_music_file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button onclick="document.getElementById('background-music').play()">Play Music</button>
+  <button onclick="document.getElementById('background-music').pause()">Pause Music</button>
+<script>
+  // Inline JavaScript for simplicity
+  window.onload = function() {
+    var speakBtn = document.getElementById('speak-btn');
+    var textInput = document.getElementById('text-to-speak');
+    var synth = window.speechSynthesis;
+    
+    speakBtn.addEventListener('click', function() {
+      var textToSpeak = textInput.value;
+      var utterThis = new SpeechSynthesisUtterance(textToSpeak);
+      synth.speak(utterThis);
+      textInput.value = ''; // Clear the input field after speaking
+    });
+  }
+</script>
+</body>
+</html>
