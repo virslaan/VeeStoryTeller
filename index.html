@@ -145,20 +145,39 @@
       }
     }
 
-    if(speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = setVoice;
+    function speakText(text) {
+  let utterance;
+  let textChunk;
+  const chunkLength = 200; // Define a suitable chunk size
+  let currentIndex = 0;
+
+  // Function to speak a chunk of text and schedule the next chunk
+  const speakChunk = () => {
+    if (currentIndex >= text.length) {
+      return; // Stop if we've reached the end of the text
     }
-    
-    speakBtn.addEventListener('click', function() {
-      if (synth.speaking) {
-          synth.cancel(); // Cancel the current speech before starting the new one
-      }
-      var textToSpeak = textInput.value;
-      var utterThis = new SpeechSynthesisUtterance(textToSpeak);
-      utterThis.voice = setVoice() || synth.getVoices()[0]; // Use the first voice if no female voice is found
-      synth.speak(utterThis);
-      textInput.value = ''; // Clear the input field after speaking
-    });
+    textChunk = text.substring(currentIndex, currentIndex + chunkLength);
+    currentIndex += chunkLength;
+
+    utterance = new SpeechSynthesisUtterance(textChunk);
+    utterance.voice = setVoice() || window.speechSynthesis.getVoices()[0]; // Use the first voice if no female voice is found
+    utterance.onend = speakChunk; // On end, speak the next chunk
+    window.speechSynthesis.speak(utterance);
+  };
+
+  speakChunk(); // Start speaking
+}
+
+// Modify the event listener for the speak button
+speakBtn.addEventListener('click', function() {
+  if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel(); // Cancel the current speech before starting the new one
+  }
+  var textToSpeak = textInput.value;
+  speakText(textToSpeak); // Use the new speakText function
+  textInput.value = ''; // Clear the input field after speaking
+});
+
   }
   
 </script>
