@@ -19,37 +19,48 @@
     max-width: 800px;
     margin: auto;
     padding: 20px;
+    text-align: center;
   }
   h1 {
-    text-align: center;
     color: #333;
   }
   button, input[type='text'], textarea {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    width: 80%; /* Adjust width */
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box; /* Add this to include padding in width */
   }
   button {
     background-color: #5dade2;
     color: #fff;
     border: none;
+    border-radius: 5px; /* Rounded corners */
     cursor: pointer;
+    font-size: 0.9em;
+    padding: 6px 10px; /* Smaller padding */
   }
   button:hover {
     background-color: #3498db;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add shadow on hover */
   }
   #story-board {
     height: 100px;
+    resize: vertical; /* Allow vertical resizing */
   }
   .story {
     background-color: #fff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin: 20px 0;
-    padding: 15px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
     cursor: pointer;
+    transition: transform 0.2s; /* Animation on hover */
+  }
+  .story:hover {
+    transform: scale(1.05); /* Scale up on hover */
   }
 </style>
+
 </head>
 <body>
   <div class="container">
@@ -102,7 +113,8 @@
     document.execCommand("copy");
     alert("Copied the text: " + copyText.value);
   }
-  
+  const backgroundMusic = document.getElementById('background-music');
+    
     function playRandomMusic() {
       const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
       backgroundMusic.src = randomTrack;
