@@ -90,6 +90,12 @@
     copyText();
   }
 
+   const musicTracks = [
+      'story1.mp3',
+      'story2.mp3',
+      'story3.mp3',
+      // ... add as many as you have
+    ];
   function copyText() {
     var copyText = document.getElementById("story-board");
     copyText.select();
@@ -97,11 +103,12 @@
     alert("Copied the text: " + copyText.value);
   }
   
-   function playRandomMusic() {
-    const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
-    backgroundMusic.src = randomTrack;
-    backgroundMusic.play();
-  }
+    function playRandomMusic() {
+      const randomTrack = musicTracks[Math.floor(Math.random() * musicTracks.length)];
+      backgroundMusic.src = randomTrack;
+      backgroundMusic.play();
+    }
+   
   
   window.onload = function() {
     var speakBtn = document.getElementById('speak-btn');
