@@ -3,36 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speak & Play Music</title>
+<title>VeeStoryTeller</title>
 <style>
-  /* Inline CSS for simplicity */
+  /* CSS for visual improvements */
   body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  h1 {
     text-align: center;
+    color: #333;
   }
-  #text-to-speak {
-    width: 300px;
+  button, input[type='text'], textarea {
+    display: block;
+    width: 100%;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
   }
-  #speak-btn {
-    padding: 10px 20px;
-    margin: 10px;
+  button {
+    background-color: #5dade2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #3498db;
+  }
+  #story-board {
+    height: 100px;
+  }
+  .story {
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    padding: 15px;
+    cursor: pointer;
   }
 </style>
 </head>
 <body>
-  <h1>Speak & Play Music</h1>
-  <input type="text" id="text-to-speak" placeholder="Type something..." />
-  <button id="speak-btn">Speak</button>
-  <br>
-  <audio id="background-music" loop>
-    <source src="your_music_file.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <button onclick="document.getElementById('background-music').play()">Play Music</button>
-  <button onclick="document.getElementById('background-music').pause()">Pause Music</button>
+  <div class="container">
+    <h1>VeeStoryTeller</h1>
+    
+    <input type="text" id="text-to-speak" placeholder="Type something..." />
+    <button id="speak-btn">Speak</button>
+    
+    <audio id="background-music" loop>
+      <!-- Sources will be added dynamically by JavaScript -->
+    </audio>
+    <button onclick="playRandomMusic()">Play Random Music</button>
+    <button onclick="document.getElementById('background-music').pause()">Pause Music</button>
+    
+    <textarea id="story-board" placeholder="Copy-paste your story here..."></textarea>
+    <button onclick="copyText()">Copy Text</button>
+    
+    <div id="predefined-stories">
+      <h2>Click a story to copy it:</h2>
+      <div class="story" onclick="copyPredefinedStory('story1')">Story 1: The Sun and The Moon</div>
+      <div class="story" onclick="copyPredefinedStory('story2')">Story 2: The Wise Owl</div>
+      <div class="story" onclick="copyPredefinedStory('story3')">Story 3: The Brave Little Tailor</div>
+      <!-- Add more predefined stories as needed -->
+    </div>
+  </div>
+
 <script>
   // Inline JavaScript for simplicity
   window.onload = function() {
