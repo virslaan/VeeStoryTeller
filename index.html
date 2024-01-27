@@ -72,10 +72,13 @@
     <audio id="background-music" loop>
       <!-- Sources will be added dynamically by JavaScript -->
     </audio>
+    <div>
     <button onclick="playRandomMusic()">Play Random Music</button>
-    <button onclick="document.getElementById('background-music').pause()">Pause Music</button>
     <label for="volume-control">Music Volume:</label>
     <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.5" />
+    <button onclick="document.getElementById('background-music').pause()">Pause Music</button>
+
+    </div>
    
     <textarea id="story-board" placeholder="Copy-paste your story here..."></textarea>
     <button onclick="copyText()">Copy Text</button>
